@@ -18,3 +18,16 @@ app.get('/tshirt', (req, res) => {
 
 
 // #### The lines below set-up a new end-point the user can utilize to CREATE new data on the server
+app.post('/tshirt/:id', (req, res) => {
+    // Remember, the (req) is data coming IN from the user. In this case, the req.params, and req.body is unique data being sent by the users browser. I am pulling certain pieces (i.e. params, body) out of this data in order to track the new data being created
+    const { id } = req.params;
+    const { logo } = req.body;
+
+    if (!logo) {
+        res.status(418).send({message: 'We need a logo!'})
+    }
+
+    res.send({
+        tshirt: `👕 with your ${logo} and ID of ${id}`
+    });
+})
